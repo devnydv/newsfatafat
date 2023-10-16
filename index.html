@@ -5,23 +5,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News- All News and Updates</title>
-    <meta name="description" content="News and updates. Here you get all news and updates about entertainment, science, tech, sports.  Read and stay updated.">
+    <title>Sort news and fast Updates | NewsFataFat</title>
+    <meta name="description"
+        content="News and updates. Here you get all news and updates about entertainment, science, tech, sports.  Read and stay updated. Only 9 news at a time, sort and consise.">
     <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" href="icons/icon.webp" type="image/x-icon">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7849940869728739"
-     crossorigin="anonymous"></script>
-    
-    
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XN6RJJZZT0"></script>
-<script>
+
+
+
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XN6RJJZZT0"></script> -->
+    <!-- <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
   gtag('config', 'G-XN6RJJZZT0');
-</script>
+</script> -->
 </head>
 
 <body>
@@ -29,59 +28,114 @@
         <div id="logo">
 
 
-            <img id="mnicon" src="icons/menu_black_24dp.svg" alt="" onclick="notvisi()" />
-            <a href="index.html">
+            <img id="mnicon" src="icons/menu_black_24dp.svg" alt="menu" onclick="notvisi()" />
+            <a href="/" title="NewsFataFat">
                 <p>News FataFat
                 </p>
             </a>
         </div>
         <div id="menug">
             <ul id="ul" class="notvisi">
-                <a href="index.html" onclick="setama()">
+                <a href="/" onclick="setama()" title="home">
                     <li>Home</li>
                 </a>
-                <a href="sports.html">
+                <a href="/?cat=sports" title="sports">
                     <li>Sports</li>
                 </a>
-                <a href="entertainment.html">
+                <a href="/?cat=entertainment" title="entertainment">
                     <li>Entertainment</li>
                 </a>
-                <a href="sciencenews.html">
+                <a href="/?cat=science" title="science">
                     <li>Science</li>
                 </a>
-                <a href="technews.html">
+                <a href="/?cat=technology" title="technews">
                     <li>Tech</li>
                 </a>
             </ul>
         </div>
     </nav>
 
-    <div id="omenu">
+    <!-- <div id="omenu">
         <div id="apimenuitems">
-        <!-- <a href="news.html">
+            <a href="news.html">
             <p>News</p>
-        </a> -->
-        <a href="https://cricketkascore.lowoncost.xyz" target="_blanck">
-            <p>Ipl Live</p>
         </a>
-        <a href="https://lowoncost.xyz" target="_blanck">
-            <p>Online Deals</p>
-        </a>
+            <a href="https://cricketkascore.lowoncost.xyz" target="_blanck">
+                <p>Ipl Live</p>
+            </a>
+            <a href="https://lowoncost.xyz" target="_blanck">
+                <p>Online Deals</p>
+            </a>
         </div>
-    </div>
+    </div> -->
 
     <h1 id="snews">All News and Updates</h1>
     <div id="loading">loading...</div>
+
+
     <div id="news">
-    
+
     </div>
-    
+    </div>
+
 
 
 
 
     <!-- <script src="js/news.js"></script> -->
-    <script src="js/data.js"></script>
+
 </body>
+<script>
+    // getting category from the url and removing '-'
+    let param = new URLSearchParams(document.location.search);
+    let cat;
+    if (param.get("cat") === null) {
+        cat = "all";
+    } else {
+        cat = param.get("cat");
+        let h2 = document.getElementById("snews")
+        h2.innerText= `News and updates from ${cat}`
+    }
+
+    
+    //.................get reference of div 
+    let main = document.getElementById("news");
+
+    // fetch data from inshot api
+
+    async function getnews() {
+        let res = await fetch(`https://inshortsapi.vercel.app/news?category=${cat}`);
+        let data = await res.json();
+        data = data['data'];
+        //console.log(data)
+        // manupulate dom with data
+        data.forEach(dataArray => {
+            let title = dataArray['title']
+            let paraTitle = title.replaceAll(" ", "-");
+            paraTitle = encodeURI(title)
+            //console.log(paraTitle)
+            let html = `
+    <div class="kid1">
+            <h2 class="head">${dataArray['title']}</h2>
+            <img src="${dataArray['imageUrl']}" alt="${dataArray['title']}">
+            <p class="para"> Author: ${dataArray['author']} </p>
+            <p class="para">  ${dataArray['date']} </p>
+            
+            <p class="para">${dataArray['content']}</p>
+            <a href="read.html?cat=${cat}&title=${paraTitle}" title="Read full news ${encodeURI(dataArray['title'])}">
+                <button style='margin:10px; color: #0114E8'>Read More...</button>
+            </a>
+            <a href="${dataArray['url']}"  target="_blank">Source...</a>
+        </div>
+    `
+            main.insertAdjacentHTML("beforeend", html);
+
+
+        });
+        const element = document.getElementById("loading");
+        element.remove();
+    }
+    getnews()
+</script>
 
 </html>
