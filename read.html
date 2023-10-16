@@ -76,7 +76,7 @@
     //let cat = param.get('category')
     let title = paratitle.split('-').join(' ');
     title = decodeURI(paratitle);
-
+console.log(title);
 
     //fetch api to filter news...
     (async function getnews() {
@@ -93,9 +93,9 @@
         if (mainNewses.length === 0) {
             //newsdiv.innerText= "That's an old news read new updates bellow..."
             let notavailable = `
-            <p class="head" style="font-size: 32px;">Opps that is an old news...<p>
+            <p class="head" style="font-size: 32px;">Opps that is a bad news..<p>
                 <p class="para" style="text-align: center; font-size: 32px;"> 😔</p>
-                <p class="para"> Don't be sad, We have new updates bellow...</p>
+                <p class="para"> We will solve the issue soon. Don't be sad, We have new updates bellow...</p>
             `
             newsdiv.insertAdjacentHTML("beforeend", notavailable)
             setTimeout(function () { newsdiv.remove() }, 3000);
@@ -134,7 +134,7 @@
 
         data.forEach(dataArray => {
             let title = dataArray['title']
-            let paraTitle = title.replaceAll(" ", "-");
+            let paraTitle = decodeURI(title);
             //console.log(paraTitle)
             let html = `
     <div class="kid1">
@@ -142,7 +142,6 @@
             <img src="${dataArray['imageUrl']}" alt="img">
             <p class="para"> Author: ${dataArray['author']} </p>
             <p class="para">  ${dataArray['date']} </p>
-            <p class="para">  </p>
             <p class="para">${dataArray['content']}</p>
             <a href="read?cat=${cat}&title=${paraTitle}" >
                 <button style='margin:10px; color: #0114E8'>Read More...</button>
