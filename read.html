@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News and daily Updates | NewsFataFat</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="icons/icon.webp" type="image/x-icon">
+    <meta name="description" content="short news that are important and usefull.">
+</head>
+
+<body>
+    <nav id="hemu">
+        <div id="logo">
+
+
+            <img id="mnicon" src="icons/menu_black_24dp.svg" alt="" onclick="notvisi()" />
+            <a href="/">
+                <p>News FataFat
+                </p>
+            </a>
+        </div>
+        <div id="menug">
+            <ul id="ul" class="notvisi">
+                <a href="/" title="home">
+                    <li>Home</li>
+                </a>
+                <a href="/?cat=sports" title="sports">
+                    <li>Sports</li>
+                </a>
+                <a href="/?cat=entertainment" title="entertainment">
+                    <li>Entertainment</li>
+                </a>
+                <a href="/?cat=science" title="science">
+                    <li>Science</li>
+                </a>
+                <a href="/?cat=technology" title="technology">
+                    <li>Tech</li>
+                </a>
+            </ul>
+        </div>
+    </nav>
+
+
+
+    <div id="pagenews">
+        <div id="newsdiv">
+
+            <!-- generating dynamically  -->
+            </a>
+
+        </div>
+    </div>
+
+    <!-- page news ends here -->
+
+    <h2 id="snews">Continue Reading</h2>
+    <div id="loading">loading...</div>
+    <div id="news">
+        <!-- generating kid1 div dynamically -->
+    </div>
+    </div>
+</body>
+<script>
+
+
+    //.................get reference of div 
+    let main = document.getElementById("news");
+
+
+    // getting title from the url and removing '-'
+    let param = new URLSearchParams(document.location.search);
+    let paratitle = param.get("title");
+    let cat = param.get("cat");
+    //let cat = param.get('category')
+    let title = paratitle.split('-').join(' ');
+    title = decodeURI(paratitle);
+
+
+    //fetch api to filter news...
+    (async function getnews() {
+        let res = await fetch(`https://inshortsapi.vercel.app/news?category=${cat}`);
+        let data = await res.json();
+        data = data['data'];
+        
+        let mainNewses = data.filter((e) =>
+            e["title"] === title
+
+        );
+
+        //if title is invalid
+        if (mainNewses.length === 0) {
+            //newsdiv.innerText= "That's an old news read new updates bellow..."
+            let notavailable = `
+            <p class="head" style="font-size: 32px;">Opps that is an old news...<p>
+                <p class="para" style="text-align: center; font-size: 32px;"> 😔</p>
+                <p class="para"> Don't be sad, We have new updates bellow...</p>
+            `
+            newsdiv.insertAdjacentHTML("beforeend", notavailable)
+            setTimeout(function () { newsdiv.remove() }, 3000);
+        } else {
+            mainNews = mainNewses[0];
+
+            // inset dynamic title and meta desc for seo.....
+            document.title = mainNews["title"];
+            let meta = document.querySelector('meta[name="description"]');
+  meta.setAttribute("content", `${mainNews["content"]}`);
+
+
+            // inser data into newsdiv
+            let newsdiv = document.getElementById("newsdiv")
+            let newshtml = `
+            <h1 class="head">${mainNews["title"]}</h1>
+            <img src="${mainNews['imageUrl']}" alt="${mainNews["title"]}">
+            <p class="para"> ${mainNews["date"]}</p>
+            <p class="para">${mainNews["content"]}</p>
+            <p class="para"> By: ${mainNews["author"]} </p>
+            <a href="${mainNews["url"]}" title="Source." rel="noopener noreferrer">
+                <button style="margin:10px; color: #0114E8">Source...</button>
+            </a>
+`
+            newsdiv.insertAdjacentHTML("beforeend", newshtml)
+        }
+
+
+
+
+        // remove the news from data ie there on newsdiv
+
+        data = data.filter(objdata => !mainNewses.some
+            (objmainNews => objdata.title === objmainNews.title))
+        // manupulate dom with data of all news
+
+        data.forEach(dataArray => {
+            let title = dataArray['title']
+            let paraTitle = title.replaceAll(" ", "-");
+            //console.log(paraTitle)
+            let html = `
+    <div class="kid1">
+            <h1 class="head">${dataArray['title']}</h1>
+            <img src="${dataArray['imageUrl']}" alt="img">
+            <p class="para"> Author: ${dataArray['author']} </p>
+            <p class="para">  ${dataArray['date']} </p>
+            <p class="para">  </p>
+            <p class="para">${dataArray['content']}</p>
+            <a href="read.html?title=${paraTitle}" >
+                <button style='margin:10px; color: #0114E8'>Read More...</button>
+            </a>
+            <a href="${dataArray['url']}" target="_blank">Source...</a>
+        </div>
+    `
+            main.insertAdjacentHTML("beforeend", html)
+        })
+
+
+        const element = document.getElementById("loading");
+        element.remove();
+    })();
+</script>
+
+</html>
