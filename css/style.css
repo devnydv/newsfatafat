@@ -278,11 +278,9 @@ body{
   
 }
 .kid1 img{
-  margin-left: auto;
-  margin-right: auto;
-  height: 200px;
-  width: 92%;
-  margin: 10px;
+  aspect-ratio: auto;
+  max-width: 92%;
+  max-height: 200px;
   
 
 }
@@ -315,11 +313,9 @@ body{
    
 }
 #newsdiv img{
-  margin-left: auto;
-  margin-right: auto;
-  height: 200px;
-  width: 92%;
-  margin: 10px;
+  aspect-ratio: auto;
+  max-width: 95%;
+  max-height: 250px;
   
 
 }
