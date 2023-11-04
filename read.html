@@ -107,7 +107,16 @@ console.log(title);
             let meta = document.querySelector('meta[name="description"]');
   meta.setAttribute("content", `${mainNews["content"]}`);
 
+             function insertMetaImgTagInHead(imageUrl) {
+             const metaTag = document.createElement('meta');
+             metaTag.setAttribute('property', 'og:image');
+             metaTag.setAttribute('content', imageUrl);
+             document.head.appendChild(metaTag);
+             }
+             const imageUrl = mainNews['imageUrl']
+             insertMetaImgTagInHead(imageUrl);
 
+            
             // inser data into newsdiv
             let newsdiv = document.getElementById("newsdiv")
             let newshtml = `
