@@ -1,6 +1,6 @@
 import json
 import math
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_from_directory
 from api import filehandle, getpost
 from savedata import hit
 
