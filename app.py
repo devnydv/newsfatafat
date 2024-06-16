@@ -4,7 +4,7 @@ from flask import Flask, render_template, request
 from api import filehandle, getpost
 from savedata import hit
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
 
 
 
