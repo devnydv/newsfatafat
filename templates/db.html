@@ -1,0 +1,42 @@
+<!-- sendf data to database using flask post method -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>create a new article</title>
+    <link rel="stylesheet" href="css/db.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/db.css' )}}">
+    <meta name="robots" content="noindex">
+</head>
+<body>
+    <form  method="post">
+        <input id="idinp" type="text" class="inputfild" placeholder="id">
+    </form>
+    <div id="main" style="display:flex; align-items: center; justify-content: center; flex-direction: column;">
+        <span>new post id</span>
+        <input id="idinp" type="text" class="inputfild" placeholder="id">
+        <button onclick="fetchToUpdate()">Fetch to Update</button>
+        <span>Insert Title</span>
+        <input type="text" id="title" class="inputfild" placeholder="title">
+        <span>post Date</span>
+        <input id="postdate" type="text" class="inputfild" placeholder="Ony for update">
+        <span>Image Url</span>
+        <input type="text" id="imglink" class="inputfild" placeholder="image link">
+        <button id="upload_widget" class="cloudinary-button">Upload files</button>
+        <span>Post category</span>
+        <input type="text" id="cat" class="inputfild" placeholder="Post category can be multiple">
+        <textarea name="" id="desc" cols="30" rows="10" class="inputfild" placeholder="description"></textarea>
+        <input type="text" id="urltitle" placeholder="Url Title" class="inputfild">
+        <span>Extra URL</span>
+        <input id="url" type="text" placeholder="link" class="inputfild">
+        <span id="error"></span>
+        <button class="but" onclick="getData()">Submit </button>
+        <button class="but" onclick="update()">Update</button>
+    </div>
+    <div id="existingData">
+
+    </div>
+
+</body>
+</html>

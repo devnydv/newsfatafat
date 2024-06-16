@@ -1,0 +1,81 @@
+{% from "title_macro.html" import replacedtitle %}
+
+
+{% macro card(cat) -%}
+<div id='news'>
+    {% for item in dbdata %}
+
+    {% set title = item["title"]| lower %}
+
+
+    <div class='kid1'>
+        <a href="/news/{{cat}}/{{item['id']}}/{{replacedtitle(title)}}" title='{{replacedtitle(title)}}'>
+            <div>
+                <h2 class='head'>{{item["title"]}}</h2>
+                <div class="imgdiv">
+                    <img src='{{item["imageUrl"]}}' loading='lazy' alt='{{title}}'>
+                </div>
+                <p class='para'>{{item["date"]}}</p>
+                <p class='para'>{{item["content"]}}</p>
+            </div>
+        </a>
+        <!-- <a href='/?category={{item["cat"]}}' title='{{item["cat"]}}'>
+            <p class='catbut'>{{item["cat"]}}</p>
+        </a> -->
+    </div>
+
+    {% endfor%}
+</div>
+
+{%- endmacro %}
+
+
+{%extends"base.html" %}
+{% block seo %}
+<title> Short news and updated with NewsFatafat</title>
+<meta name="description"
+    content="Get your daily dose of news  & more in bite-sized articles. Ditch the endless search, visit NewsFatafat for for short News and fast updates.">
+{% endblock %}
+{% block content %}
+
+{%if cate == None %}
+
+
+<h1 id='snews'>All tranding Short News over Globe </h1>
+{{card("all")}}
+<div id="page">
+    {%for x in range(pages)%}
+    
+    {%if x  == 0 %}
+    <a href="/">
+        <p>Home</p>
+    </a>
+    {% else%}
+    <a href="/?page={{x}}">
+        <p>Page: {{x}}</p>
+    </a>
+    {%endif%}
+    {%endfor%}
+</div>
+{% else %}
+<h1 id='snews'>Buzz from {{cate|title}} Section</h1>
+{{card(cate)}}
+<div id="page">
+    {%for x in range(pages )%}
+
+    
+    {%if x  == 0 %}
+    <a href="/{{cate}}">
+        <p>Home</p>
+    </a>
+    {% else%}
+    <a href="/{{cate}}/?page={{x}}">
+        <p>Page: {{x}}</p>
+    </a>
+    {%endif%}
+    {%endfor%}
+</div>
+{%endif%}
+
+
+{% endblock %}

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href={{url_for('static', filename='css/style.css' )}}>
+    <link rel="shortcut icon" href={{url_for('static', filename='ico/icon.webp' )}} type="image/x-icon">
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "url": "https://newsfatafat.vercel.app",
+          "name": "NewsFatafat",
+          "potentialAction": []
+        }
+        </script>
+    {% block seo %}
+
+    {% endblock %}
+
+</head>
+
+<body>
+    <nav id="hemu">
+        <div id="logo">
+            <img id="mnicon" onclick="notvisi()" src="{{url_for('static', filename='ico/menu_black_24dp.svg')}}"
+                alt="menu">
+            <a href="/" title="NewsFatafat">
+                <p>NewsFatafat</p>
+            </a>
+        </div>
+        <div id="menug">
+            <ul id="ul" class="notvisi">
+                <li>
+                    <a href="/" onclick="setama()" title="home">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="/entertainment" title="Trailer">
+                        Entertainment
+                    </a>
+                </li>
+                <li>
+                    <a href="/science" title="Movie">
+                        Science
+                    </a>
+                </li>
+                <li>
+                    <a href="/sports" title="Song">
+                        Sports
+                    </a>
+                </li>
+                <li>
+                    <a href="/technology" title="Song">
+                        Tech
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    {% block content %}
+
+    {% endblock %}
+    <footer>
+        <div class="footerKid">
+            <h3>NewsFatafat</h3>
+            <p> Read Amazing short news in Hindi. Souce InshortNews. Get your updates in short time.</p>
+            
+           
+        </div>
+        <div class="footerKid">
+            <h3>Some Categories</h3>
+            <a href="/science" title="Read Science News"> Science</a>
+            <a href="/sports" title="Read Sports News">Sports</a>
+            <a href="/entertainment" title="Read Entertainment">Entertainment</a>
+        </div>
+        <div class="footerKid">
+            <a href="/source"></a>
+            <a href="https://www.facebook.com/people/Newsfatafat/61552374107088/" title="facebook page link">Facebook Page</a>
+            <a href="/" title="contact page">Contact Us</a>
+        </div>
+        <div class="footerKid">
+            <a href="https://dealsfind.vercel.app/"> Find Deals</a>
+            <a href="https://www.mastiflicks.site/static/sitemap.xml" title="sitemap link"> Sitemap</a>
+            
+        </div>
+    </footer>
+</body>
+<script>
+    function notvisi() {
+
+        let btn = document.getElementById('ul');
+        btn.classList.toggle('notvisi')
+        console.log("manu")
+    }
+</script>
+
+</html>
