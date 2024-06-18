@@ -6,6 +6,7 @@
 {%- set result = result.replace("'", "") -%}
 {%- set result = result.replace(",", "") -%}
 {%- set result = result.replace(";", "") -%}
+{%- set result = result.replace("%", "") -%}
 {%- set result = result.replace(" ", "-") -%}
 {{result}}
 {%- endmacro %}
