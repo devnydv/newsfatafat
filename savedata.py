@@ -51,7 +51,7 @@ def savingdata(category):
     if main_title== data_title:
         print("no need to edit...")
     else:
-        for x in range(2):
+        for x in range(1):
             datatodb[x]["id"] =originaldDtaSize
             transtitle = datatodb[x]["title"]
             transDesc = datatodb[x]['content']
