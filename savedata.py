@@ -7,7 +7,7 @@ def tr(item):
     translator = EasyGoogleTranslate(
         source_language='en',
         target_language='hi',
-        timeout=10
+        #timeout=10
     )
     result = translator.translate(item)
     return result
