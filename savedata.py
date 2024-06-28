@@ -33,7 +33,7 @@ def savingdata(category):
     maindata = res.json()
     main_title= maindata["data"][0]['title']
     datatodb = maindata["data"]
-    datatodb.reverse()
+    
     #print(datatodb)
 
     #get data from database compare and save
