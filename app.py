@@ -78,7 +78,7 @@ def redirt(cat, id, title):
     return redirect (f"/news/{cat}/{id}")
 @app.route("/newdb")
 def newdb():
-    return render_template("newdb.html")
+    return render_template("newdb.html", 301)
 
 @app.route("/api")
 def saveapi():
