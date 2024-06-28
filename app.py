@@ -1,6 +1,6 @@
 import json
 import math
-from flask import Flask, render_template, request, send_from_directory
+from flask import Flask, render_template, request, send_from_directory, redirect 
 from api import filehandle, getpost
 from savedata import hit
 
@@ -70,7 +70,12 @@ def news(cat, id):
     #post = [item for item in data if item["id"] == id]
     #print(post)
     return render_template("read.html", ids = id, dbdata = post,  cate = cat)
-
+@app.route("/news/<cat>/<id>/<title>")
+def redirt(cat, id, title):
+    #data = filehandle(cat)
+    id = int(id)
+    post = getpost(cat, id)
+    return redirect (f"/news/{cat}/{id}")
 @app.route("/newdb")
 def newdb():
     return render_template("newdb.html")
