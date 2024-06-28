@@ -49,7 +49,7 @@ def cate(cat):
     return render_template("index.html" , cate = cat, dbdata = data[start: end], pages=tota_page)
 
 @app.route("/news/<cat>/<id>")
-def news(cat, id, title):
+def news(cat, id):
     #data = filehandle(cat)
     id = int(id)
     post = getpost(cat, id)
