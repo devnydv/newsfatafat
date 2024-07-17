@@ -4,9 +4,9 @@
 {%extends"base.html" %}
 {% block seo %}
 <title>{{title}}</title>
-<meta name="description" content="{{dbdata['content'][:200]}}">
+<meta name="description" content="{{dbdata['content'][:150]}}...">
 <meta property="og:title" content="{{title}}" />
-<meta property="og:description" content="{{dbdata['content'][:200]}}" />
+<meta property="og:description" content="{{dbdata['content'][:150]}}..." />
 <meta property="og:image" content="{{dbdata['imageUrl']}}" />
 
 <script type="application/ld+json">
