@@ -8,7 +8,18 @@
 <meta property="og:title" content="{{title}}" />
 <meta property="og:description" content="{{dbdata['content'][:150]}}..." />
 <meta property="og:image" content="{{dbdata['imageUrl']}}" />
-
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "ImageObject",
+    "url": "{{dbdata['imageUrl']}}",
+    "contentUrl": "{{dbdata['imageUrl']}}",
+    "name": "{{title[:50]}}",
+    "description": "{{title}}",
+    "width": 800,
+    "height": 600
+  }
+</script>
 <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -25,7 +36,7 @@
         "name": "NewsFatafat"
       },
       "datePublished": "{{dbdata["date"]}}",
-      "url": "https://newsfatafat.vercel.app/news/{{cate}}/{{ids}}/{{ seotitle }}"
+      "url": "https://newsfatafat.vercel.app/news/{{cate}}/{{ids}}"
 
     }
 </script>
@@ -42,7 +53,7 @@
         "@type": "ListItem",
         "position": 2,
         "name": "{{cate}}",
-        "item": "https://newsfatafat.vercel.app/{{dcate}}"
+        "item": "https://newsfatafat.vercel.app/{{cate}}"
       },{
         "@type": "ListItem",
         "position": 3,
