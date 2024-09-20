@@ -10,7 +10,7 @@
     {% set title = item["title"]| lower %}
 
     <div class="card">
-        <a href="/news/{{cat}}/{{item['id']}}"  title='{{replacedtitle(title)}}'>
+        <a href="/news/{{cat}}/{{item['id']}}" class="card-url"  title='{{replacedtitle(title)}}'>
             <img src="{{item['imageUrl']}}" alt='{{title}}' class="card-image">
             <div class="card-content">
                 <h3 class="card-title">{{item["title"]}}</h3>
@@ -31,7 +31,7 @@
 
 {%extends"base.html" %}
 {% block seo %}
-<title> Short news and updated with NewsFatafat</title>
+<title> Short news and updates with NewsFatafat</title>
 <meta name="description"
     content="Get your daily dose of news  & more in bite-sized articles. Ditch the endless search, visit NewsFatafat for for short News and fast updates.">
 <link rel="stylesheet" href="{{url_for('static', filename='css/card.css')}}">
@@ -77,7 +77,8 @@
             const card = this.closest('.card');
             const title = card.querySelector('.card-title').textContent;
             const description = card.querySelector('.card-description').textContent;
-            const url = window.location.href;
+            const url = card.querySelector('.card-url').textContent;
+            //const url = window.location.href;
 
             const shareData = {
                 title: title,
