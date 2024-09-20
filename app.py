@@ -1,52 +1,39 @@
-import json
-import math
+
 from flask import Flask, render_template, request, send_from_directory, redirect 
-from api import filehandle, getpost
+from api import filehandle, getpost, lastd, load
 from savedata import hit
 
 app = Flask(__name__, static_folder='static')
 
 
-
 data = filehandle("all")
-reverseddata = data
-postlen = len(reverseddata)
 
-
-#@app.route("/")
-#def index():
-    #return render_template("index.html" ,dbdata= data)
-
-@app.route("/")
+@app.route("/", methods = ["GET", "POST"])
 def fil():
-    
-    page = request.args.get("page", 0 ,type=int)
-    page = page +1
-    start = 30*page - 30
-    end = 30*page
-    #print(start, end)
-    tota_page = postlen  / 30
-    tota_page = math.ceil(tota_page)
-    #print(tota_page)
-    cate = request.args.get("category")
-    #if cate == None:
-        #print(reverseddata[start:1])
-    return render_template("index.html",dbdata = reverseddata[start: end], cate = cate, pages= tota_page)
+    if request.method == "GET":
+        
+        reverseddata = data
+        cate = request.args.get("category")
+        return render_template("card.html", dbdata = reverseddata, cate = cate)
+    elif request.method == "POST":
+        cate = request.args.get("category")
+        postlen = int(lastd(cate)) -11
+        page = request.args.get("page", 0 ,type=int)
+        start = int(postlen) - 12*page
+        print(start)
+        loaddata = load(cate, start)
+        if loaddata == "rev":
+            return "No More news"
+        else:
+            return render_template("load.html" ,dbdata= loaddata, cat = cate)
+
     
 
 @app.route("/<cat>/")
 def cate(cat):
     data = filehandle(cat)
-    postlen = len(data)
-    page = request.args.get("page", 0 ,type=int)
-    page = page +1
-    start = 30*page - 30
-    end = 30*page
     #print(start, end)
-    tota_page = postlen  / 30
-    tota_page = math.ceil(tota_page)
-    data = filehandle(cat)
-    return render_template("index.html" , cate = cat, dbdata = data[start: end], pages=tota_page)
+    return render_template("card.html" , cate = cat, dbdata = data)
 
 @app.route("/news/<cat>/<id>")
 def news(cat, id):
@@ -76,9 +63,7 @@ def redirt(cat, id, title):
     id = int(id)
     post = getpost(cat, id)
     return redirect (f"/news/{cat}/{id}")
-@app.route("/newdb")
-def newdb():
-    return render_template("newdb.html", 301)
+
 
 @app.route("/api")
 def saveapi():

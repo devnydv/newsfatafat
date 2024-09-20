@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href={{url_for('static', filename='css/style.css' )}}>
+    <link rel="stylesheet" href={{url_for('static', filename='css/base.css' )}}>
     <link rel="shortcut icon" href={{url_for('static', filename='ico/favicon.svg' )}} type="image/x-icon">
     <meta name="google-site-verification" content="T_ghZTVRmBjxva0e9ljgiuo3pauPQxJtY75-DKkBKbM" />
     <script type="application/ld+json">
@@ -38,29 +38,31 @@
                         Home
                     </a>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="/entertainment" title="Trailer">
                         Entertainment
                     </a>
-                </li>
-                <li>
+                </li> -->
+                <!-- <li>
                     <a href="/science" title="Movie">
                         Science
                     </a>
-                </li>
-                <li>
+                </li> -->
+                <!-- <li>
                     <a href="/sports" title="Song">
                         Sports
                     </a>
-                </li>
+                </li> -->
                 <li>
-                    <a href="/technology" title="Song">
-                        Tech
+                    <a href="/static/sitemap.xml" title="sitemap">
+                        Sitemap
                     </a>
                 </li>
             </ul>
         </div>
     </nav>
+
+    
     {% block content %}
 
     {% endblock %}

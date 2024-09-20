@@ -1,0 +1,18 @@
+{% for item in dbdata %}
+
+<div class="card">
+    <a href="/news/{{cat}}/{{item['id']}}" title='{{item["title"]}}'>
+        <img src="{{item['imageUrl']}}" alt='{{item["title"]}}' loading="lazy" class="card-image">
+        <div class="card-content">
+            <h3 class="card-title">{{item["title"]}}</h3>
+            <p class="card-date">{{item["date"]}}</p>
+            <p class="card-description">{{item["content"]}}</p>
+        </div>
+    </a>
+    <div class="card-footer">
+        <span class="card-category">{{cat |title}}</span>
+        <button class="share-button">Share</button>
+    </div>
+
+</div>
+{% endfor%}
