@@ -81,7 +81,7 @@ h1 {
 
 .read{
     width: 40%;
-    margin: 2rem 0;
+    
 }
 .card {
     background-color: #fff;
@@ -195,7 +195,7 @@ h1 {
 
 @media(max-width: 700px){
     .read{
-        width: 90%;
-        margin-top: 2rem;
+        width: 95%;
+        
     }
 }

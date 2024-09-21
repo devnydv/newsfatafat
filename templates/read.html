@@ -68,26 +68,29 @@
 
 
 {% block content %}
+<div class="container">
+    {% include 'categories.html' %}
 
-<div class="newscard">
-    <div class="card read">
+    <div class="newscard">
+        <div class="card read">
             <img src="{{dbdata['imageUrl']}}" alt='{{title}}' class="card-image">
             <div class="card-content">
                 <h1 class="read-card-title">{{dbdata["title"]}}</h1>
                 <p class="card-date">{{dbdata["date"]}}</p>
                 <p class="read-card-description">{{dbdata["content"]}}</p>
             </div>
-        </a>
-        <div class="card-footer">
-            <a href='{{dbdata["url"]}}' title='Inshort News' target="_blank">
-            <!-- <span class="card-category">{{cat |title}}</span> -->
-                <button class="card-category">Source</button>
             </a>
-            <button class="share-button">Share</button>
+            <div class="card-footer">
+                <a href='{{dbdata["url"]}}' title='Inshort News' target="_blank">
+                    <!-- <span class="card-category">{{cat |title}}</span> -->
+                    <button class="card-category">Source</button>
+                </a>
+                <button class="share-button">Share</button>
+            </div>
+
         </div>
 
     </div>
-
 </div>
 <!-- <div id='pagenews'>
   <div id='newsdiv'>
@@ -99,7 +102,7 @@
       <button class="catbut">Check Source...</button>
     </a>
   </div> -->
-</div>
+<!-- </div> -->
 
 
 <!-- <p class="head" style="font-size:x-large; font-weight: bolder; text-align:center; margin: 5px 4px;"> Reade More</p>
