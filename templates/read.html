@@ -132,4 +132,35 @@
 
 <!-- </div>
 {%- endif%} -->
+
+
+<script>
+    // Share button functionality
+    document.querySelectorAll('.share-button').forEach(button => {
+        button.addEventListener('click', function () {
+            const card = this.closest('.card');
+            const title = card.querySelector('.card-title').textContent;
+            //const description = card.querySelector('.card-description').textContent;
+            const description = "Click the link below to read this short news"
+            //const url = card.querySelector('.card-url').href;
+            //console.log(url.href)
+            const url = window.location.href;
+
+            const shareData = {
+                title: title,
+                text: description,
+                url: url
+            };
+
+            if (navigator.share) {
+                navigator.share(shareData)
+                    .then(() => console.log('Shared successfully'))
+                    .catch((error) => console.log('Error sharing:', error));
+            } else {
+                alert('Share feature is not supported in your browser. You can copy this URL to share: ' + url);
+            }
+        });
+    });
+
+</script>
 {% endblock %}
