@@ -20,11 +20,11 @@ h1 {
     color: #333;
     margin-bottom: 2rem;
 }
-h2 {
+/* h2 {
     text-align: center;
     color: #333;
     margin-bottom: 2rem;
-}
+} */
 
 .category-container {
     position: relative;
@@ -74,7 +74,15 @@ h2 {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
 }
+.newscard{
+    display: flex;
+    justify-content: center;
+}
 
+.read{
+    width: 40%;
+    margin: 2rem 0;
+}
 .card {
     background-color: #fff;
     border-radius: 8px;
@@ -99,7 +107,12 @@ h2 {
 .card-content {
     padding: 1.5rem;
 }
-
+/* css for title of read page */
+.read-card-title{
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
 .card-title {
     font-size: 1.25rem;
     font-weight: bold;
@@ -116,7 +129,11 @@ h2 {
     color: #666;
     margin-bottom: 1rem;
 }
-
+.read-card-description{
+    color: #333;
+    text-align: justify;
+    margin-bottom: 1rem;
+}
 .card-description {
     color: #333;
     text-align: justify;
@@ -171,5 +188,14 @@ h2 {
     .category-grid {
         flex-wrap: wrap;
         justify-content: center;
+    }
+
+    
+}
+
+@media(max-width: 700px){
+    .read{
+        width: 90%;
+        margin-top: 2rem;
     }
 }

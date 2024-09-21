@@ -8,8 +8,7 @@
 <meta property="og:title" content="{{title}}" />
 <meta property="og:description" content="{{dbdata['content'][:150]}}..." />
 <meta property="og:image" content="{{dbdata['imageUrl']}}" />
-<!-- <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}"> -->
-<link rel="stylesheet" href="{{url_for('static', filename='css/card.css')}}">
+<link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
 <script type="application/ld+json">
   {
     "@context": "http://schema.org",
@@ -69,27 +68,8 @@
 
 {% block content %}
 
-<div class="newscard">
-    <div class="card read">
-            <img src="{{dbdata['imageUrl']}}" alt='{{title}}' class="card-image">
-            <div class="card-content">
-                <h1 class="read-card-title">{{dbdata["title"]}}</h1>
-                <p class="card-date">{{dbdata["date"]}}</p>
-                <p class="read-card-description">{{dbdata["content"]}}</p>
-            </div>
-        </a>
-        <div class="card-footer">
-            <a href='{{dbdata["url"]}}' title='Inshort News' target="_blank">
-            <!-- <span class="card-category">{{cat |title}}</span> -->
-                <button class="card-category">Source</button>
-            </a>
-            <button class="share-button">Share</button>
-        </div>
 
-    </div>
-
-</div>
-<!-- <div id='pagenews'>
+<div id='pagenews'>
   <div id='newsdiv'>
     <h1 class='head'>{{dbdata["title"]}}</h1>
     <img src='{{dbdata["imageUrl"]}}' loading='lazy' alt={{title}}>
@@ -98,7 +78,7 @@
     <a href='{{dbdata["url"]}}' title='Inshort News' target="_blank">
       <button class="catbut">Check Source...</button>
     </a>
-  </div> -->
+  </div>
 </div>
 
 
