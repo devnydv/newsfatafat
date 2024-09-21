@@ -109,6 +109,7 @@
     loadbut.appendChild = a;
     let initial = 1
     async function loadmore() {
+        loadbut.innerText = "Loading..."
         //res = await fetch("/mongo?page=2")
         const res = await fetch(`/?page=${initial}&category=${cat}`, {
             method: 'POST',
@@ -127,6 +128,7 @@
         }
 
         initial++
+        loadbut.innerText = "Load More"
     }
     
 
