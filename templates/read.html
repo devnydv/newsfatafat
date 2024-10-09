@@ -10,38 +10,23 @@
 <meta property="og:image" content="{{dbdata['imageUrl']}}" />
 <!-- <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}"> -->
 <link rel="stylesheet" href="{{url_for('static', filename='css/card.css')}}">
+
 <script type="application/ld+json">
   {
-    "@context": "http://schema.org",
-    "@type": "ImageObject",
-    "url": "{{dbdata['imageUrl']}}",
-    "contentUrl": "{{dbdata['imageUrl']}}",
-    "name": "{{title[:50]}}",
-    "description": "{{title}}",
-    "width": 800,
-    "height": 600
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    "headline": "{{title}}",
+    "image": [
+      "{{dbdata['imageUrl']}}"
+     ],
+    "datePublished": "{{dbdata['date'] | format_date}}T08:00:00+05:30",
+    "author": [{
+        "@type": "Person",
+        "name": "Newsfatafat",
+        "url": "https://newsfatafat.vercel.app"
+      }]
   }
-</script>
-<script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "mainEntityOfPage": {
-        "@type": "WebPage"
-        
-      },
-      "headline": "{{title}} ",
-      "description": "{{dbdata['content'][:200]}}",
-      "image": "{{dbdata["imageUrl"]}}",
-      "author": {
-        "@type": "Website",
-        "name": "NewsFatafat"
-      },
-      "datePublished": "{{dbdata["date"]}}",
-      "url": "https://newsfatafat.vercel.app/news/{{cate}}/{{ids}}"
-
-    }
-</script>
+  </script>
 <script type="application/ld+json">
     {
       "@context": "https://schema.org",

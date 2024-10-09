@@ -2,6 +2,7 @@
 from flask import Flask, render_template, request, send_from_directory, redirect 
 from api import filehandle, getpost, lastd, load
 from savedata import hit
+from datetime import datetime
 
 app = Flask(__name__, static_folder='static')
 
@@ -77,6 +78,21 @@ def sour():
 @app.route('/robots.txt')
 def robots_txt():
     return send_from_directory(app.root_path, 'robots.txt')
+
+
+
+# Custom Jinja filter to format the date
+@app.template_filter('format_date')
+def format_date(value):
+    try:
+        # Convert the string to a datetime object
+        date_obj = datetime.strptime(value, '%A, %d %b, %Y')
+        # Format it to 'YYYY-MM-DD'
+        return date_obj.strftime('%Y-%m-%d')
+    except ValueError:
+        return value
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
