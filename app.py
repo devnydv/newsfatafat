@@ -1,7 +1,7 @@
 
 from flask import Flask, render_template, request, send_from_directory, redirect 
 from api import filehandle, getpost, lastd, load
-from savedata import hit
+from newsave import hit
 from datetime import datetime
 
 app = Flask(__name__, static_folder='static')
