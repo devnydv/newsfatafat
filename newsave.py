@@ -20,6 +20,14 @@ def hit():
 
 
     for category in cat:
+        dburl = f'https://filmyapp-e1005.firebaseio.com/news/{category}/data.json'
+        dbres = requests.get(dburl)
+        datafromdb= dbres.json()
+    
+        originaldDtaSize = len(datafromdb)
+        getlsttitle = datafromdb[originaldDtaSize -1]
+
+
         if category == "all":
             url = "https://inshorts.com/api/en/news?category=all_news&max_limit=5&include_card_data=true"
             res = requests.get(url)
@@ -49,12 +57,7 @@ def hit():
                 "url" : maindata["data"]['news_list'][0]["news_obj"]['shortened_url']
             }
         
-            dburl = f'https://filmyapp-e1005.firebaseio.com/news/{category}/data.json'
-            dbres = requests.get(dburl)
-            datafromdb= dbres.json()
-    
-            originaldDtaSize = len(datafromdb)
-        
+
         #print(lesssize)
             news["id"] = originaldDtaSize
         
@@ -65,7 +68,9 @@ def hit():
             url = f"https://inshorts.com/api/en/search/trending_topics/{category}?page=1&type=NEWS_CATEGORY"
             res = requests.get(url)
             maindata = res.json()
+            
 
+            
             orgdate = maindata["data"]['suggested_news'][0]["news_obj"]['created_at'] /1000
             date_time = datetime.fromtimestamp(orgdate)
             #date = date_time.strftime('%Y-%m-%d %H:%M:%S')
@@ -81,14 +86,18 @@ def hit():
                 "url" : maindata["data"]['suggested_news'][0]["news_obj"]['shortened_url']
             }
         
-            dburl = f'https://filmyapp-e1005.firebaseio.com/news/{category}/data.json'
-            dbres = requests.get(dburl)
-            datafromdb= dbres.json()
+            # dburl = f'https://filmyapp-e1005.firebaseio.com/news/{category}/data.json'
+            # dbres = requests.get(dburl)
+            # datafromdb= dbres.json()
     
-            originaldDtaSize = len(datafromdb)
+            # originaldDtaSize = len(datafromdb)
         
         #print(lesssize)
-            news["id"] = originaldDtaSize
+
+            if getlsttitle["title"] == tr(maindata["data"]['suggested_news'][0]["news_obj"]['title']):
+                print("same data found no need to save ")
+            else:
+                news["id"] = originaldDtaSize
         
-            saveurl = f'https://filmyapp-e1005.firebaseio.com/news/{category}/data/{originaldDtaSize}.json'
-            saved = requests.put(saveurl, json = news)
+                saveurl = f'https://filmyapp-e1005.firebaseio.com/news/{category}/data/{originaldDtaSize}.json'
+                saved = requests.put(saveurl, json = news)
