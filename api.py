@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 
 def filehandle(cate):
     
-    db = f'https://filmyapp-e1005.firebaseio.com/news/{cate}/data.json?orderBy="$key"&limitToLast=6'
+    db = f'https://filmyapp-e1005.firebaseio.com/news/{cate}/data.json?orderBy="$key"&limitToLast=12'
     
     response = requests.get(db)
     data = response.json()
