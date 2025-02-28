@@ -19,9 +19,10 @@ def fil():
     elif request.method == "POST":
         cate = request.args.get("category")
         postlen = int(lastd(cate)) -11
+        print(int(lastd(cate)))
         page = request.args.get("page", 0 ,type=int)
         start = int(postlen) - 12*page
-        print(start)
+        
         loaddata = load(cate, start)
         if loaddata == "rev":
             return "No More news"
@@ -42,22 +43,9 @@ def news(cat, id):
     id = int(id)
     post = getpost(cat, id)
 
-# send 9 items for the recomandation section of read route
-    # otherpost = []
-    # if id > 9:
-    #     newid = id
-    #     lowid= newid -9
-    #     for x in range(lowid, newid):
-    #         #print(x)
-    #         otherpost.append([item for item in data if item["id"] == x]) 
-    #         #print(otherpost)
-    # else:
-    #     otherpost = []
 
-    # post contains a single post that is the main post
-    #post = [item for item in data if item["id"] == id]
-    #print(post)
     return render_template("read.html", ids = id, dbdata = post,  cate = cat)
+
 @app.route("/news/<cat>/<id>/<title>")
 def redirt(cat, id, title):
     #data = filehandle(cat)

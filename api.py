@@ -1,6 +1,6 @@
 import json
 import requests
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 #import os
 #load_dotenv()
 #db = os.getenv("db")
@@ -13,7 +13,6 @@ def filehandle(cate):
     data = response.json()
     rev = list(data.values())
     rev.reverse()
-    
     return rev
 
 
@@ -28,13 +27,17 @@ def lastd(cate):
     return lastdata
 
 def load (cate, start):
+    first = 12
     #db = 'https://filmyapp-e1005.firebaseio.com/news/all/data.json?orderBy="$key"&startAt="1"&endAt="5"'
-    db = f'https://filmyapp-e1005.firebaseio.com/news/{cate}/data.json?orderBy="$key"&limitToFirst=12&startAt="{start}"'
+    db = f'https://filmyapp-e1005.firebaseio.com/news/{cate}/data.json?orderBy="$key"&limitToFirst={first}&startAt="{start}"'
     response = requests.get(db)
     data = response.json()
+    
+    
     try:
         rev = list(data.values())
         rev.reverse()
+        
         return rev
     except:
         return "rev"
