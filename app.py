@@ -47,12 +47,9 @@ def news(cat, id):
 
 @app.route("/news/<cat>/<ids>/<title>")
 def redirt(cat, ids, title):
-    data = filehandle(cat)
     #print(ids)
     ids = int(ids)
-    
     return redirect (f"/news/{cat}/{ids}")
-
 
 @app.route("/api")
 def saveapi():
