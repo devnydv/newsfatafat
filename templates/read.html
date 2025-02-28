@@ -3,10 +3,10 @@
 {% set seotitle = replacedtitle(title)| lower%}
 {%extends"base.html" %}
 {% block seo %}
-<title>{{title}}</title>
-<meta name="description" content="{{dbdata['content'][:130]}}...">
+<title>{{title [:100]}} - Newsfatafat</title>
+<meta name="description" content="{{dbdata['content'][:100]}}...">
 <meta property="og:title" content="{{title}}" />
-<meta property="og:description" content="{{dbdata['content'][:150]}}..." />
+<meta property="og:description" content="{{dbdata['content'][:100]}}..." />
 <meta property="og:image" content="{{dbdata['imageUrl']}}" />
 <!-- <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}"> -->
 <link rel="stylesheet" href="{{url_for('static', filename='css/card.css')}}">

@@ -19,7 +19,7 @@ def fil():
     elif request.method == "POST":
         cate = request.args.get("category")
         postlen = int(lastd(cate)) -11
-        print(int(lastd(cate)))
+        
         page = request.args.get("page", 0 ,type=int)
         start = int(postlen) - 12*page
         
@@ -40,18 +40,18 @@ def cate(cat):
 @app.route("/news/<cat>/<id>")
 def news(cat, id):
     #data = filehandle(cat)
+    
     id = int(id)
     post = getpost(cat, id)
-
-
     return render_template("read.html", ids = id, dbdata = post,  cate = cat)
 
-@app.route("/news/<cat>/<id>/<title>")
-def redirt(cat, id, title):
-    #data = filehandle(cat)
-    id = int(id)
-    post = getpost(cat, id)
-    return redirect (f"/news/{cat}/{id}")
+@app.route("/news/<cat>/<ids>/<title>")
+def redirt(cat, ids, title):
+    data = filehandle(cat)
+    #print(ids)
+    ids = int(ids)
+    
+    return redirect (f"/news/{cat}/{ids}")
 
 
 @app.route("/api")
