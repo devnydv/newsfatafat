@@ -1,5 +1,6 @@
 {% set title = dbdata["title"] %}
 {% from "title_macro.html" import replacedtitle %}
+{% from "macro/card.html" import newscard%}
 {% set seotitle = replacedtitle(title)| lower%}
 {%extends"base.html" %}
 {% block seo %}
@@ -76,50 +77,10 @@
         </div>
 
     </div>
+    <h2 style="margin: 20px 0px;">Read more</h2>
+    {{newscard(cate, recomand)}}
 </div>
-<!-- <div id='pagenews'>
-  <div id='newsdiv'>
-    <h1 class='head'>{{dbdata["title"]}}</h1>
-    <img src='{{dbdata["imageUrl"]}}' loading='lazy' alt={{title}}>
-    <p class='para'>{{dbdata["date"]}}</p>
-    <p class='para'>{{dbdata["content"]}}</p>
-    <a href='{{dbdata["url"]}}' title='Inshort News' target="_blank">
-      <button class="catbut">Check Source...</button>
-    </a>
-  </div> -->
-<!-- </div> -->
 
-
-<!-- <p class="head" style="font-size:x-large; font-weight: bolder; text-align:center; margin: 5px 4px;"> Reade More</p>
-{%if alldata ==[] -%}
-<a href='/' title='read more' style="font-size:large; font-weight: bolder; text-align:center; margin: 5px 5px;">
-    <p class='catbut'>Click Here to Read More...</p>
-</a>
-{%else%}
-<div id='news'>
-    
-    {% for item in alldata |reverse %}
-    
-    {% set alltitle = replacedtitle(item[0]["title"])|lower %}
-    
-    <div class='kid1'>
-        
-        <a href="/news/{{cate}}/{{item[0]['id']}}/{{alltitle}}" title='{{item[0]["title"]}}'>
-            <div>
-                <h2 class='head'>{{item[0]["title"]}}</h2>
-                <img src='{{item[0]["imageUrl"]}}' loading='lazy' alt={{title}}>
-                <p class='para'>{{item[0]["date"]}}</p>
-                <p class='para'>{{item[0]["content"]}}</p>
-            </div>
-        </a>
-        <a href='/{{item[0]["cat"]}}' title='{{item[0]["cat"]}}'>
-            <p class='catbut'>{{item[0]["cat"]}}</p>
-        </a>
-    </div>
-    {%endfor %} -->
-
-<!-- </div>
-{%- endif%} -->
 
 
 <script>

@@ -15,7 +15,7 @@ def fil():
         
         reverseddata = data
         cate = request.args.get("category")
-        return render_template("card.html", dbdata = reverseddata, cate = cate)
+        return render_template("index.html", dbdata = reverseddata, cate = cate)
     elif request.method == "POST":
         cate = request.args.get("category")
         postlen = int(lastd(cate)) -11
@@ -35,15 +35,17 @@ def fil():
 def cate(cat):
     data = filehandle(cat)
     #print(start, end)
-    return render_template("card.html" , cate = cat, dbdata = data)
+    return render_template("index.html" , cate = cat, dbdata = data)
 
-@app.route("/news/<cat>/<id>")
-def news(cat, id):
+@app.route("/news/<cat>/<ids>")
+def news(cat, ids):
     #data = filehandle(cat)
-    
-    id = int(id)
-    post = getpost(cat, id)
-    return render_template("read.html", ids = id, dbdata = post,  cate = cat)
+    recomand = filehandle(cat)
+    #print(recomand[0])
+    ids = int(ids)
+    recomand = [item for item in recomand if item["id"] != ids]
+    post = getpost(cat, ids)
+    return render_template("read.html", ids = ids, dbdata = post,  cate = cat, recomand = recomand)
 
 @app.route("/news/<cat>/<ids>/<title>")
 def redirt(cat, ids, title):

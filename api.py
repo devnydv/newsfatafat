@@ -36,7 +36,7 @@ def load (cate, start):
         rev = list(data.values())
         rev.reverse()
         return rev
-    except:
+    except:  
         return "rev"
 
 

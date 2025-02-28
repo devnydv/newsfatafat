@@ -1,0 +1,25 @@
+{% macro newscard(cat, dbdata) -%}
+<div class="card-grid" id="cardGrid">
+    {% for item in dbdata %}
+
+    {% set title = item["title"]| lower %}
+
+    <div class="card">
+        <a href="/news/{{cat}}/{{item['id']}}" class="card-url"  title='{{title}}'>
+            <img src="{{item['imageUrl']}}" alt='{{title}}' class="card-image">
+            <div class="card-content">
+                <h2 class="card-title">{{item["title"]}}</h2>
+                <p class="card-date">{{item["date"]}}</p>
+                <p class="card-description">{{item["content"][:150]}}</p>
+            </div>
+        </a>
+        <div class="card-footer">
+            <span class="card-category">{{cat |title}}</span>
+            <button class="share-button">Share</button>
+        </div>
+
+    </div>
+    {% endfor%}
+</div>
+
+{%- endmacro %}
