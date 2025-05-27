@@ -3,13 +3,20 @@ from flask import Flask, render_template, request, send_from_directory, redirect
 from api import filehandle, getpost, lastd, load
 from newsave import hit
 from datetime import datetime
+from flask_caching import Cache
 
 app = Flask(__name__, static_folder='static')
 
 
 data = filehandle("all")
 
+#catching data for faster loading
+app.config["CACHE_TYPE"] = "SimpleCache"
+app.config["CACHE_DEFOULT_TIMEOUT"] = 600 * 6
+cache =Cache(app)
+
 @app.route("/", methods = ["GET", "POST"])
+@cache.cached()
 def fil():
     if request.method == "GET":
         
@@ -32,6 +39,7 @@ def fil():
     
 
 @app.route("/<cat>/")
+@cache.cached()
 def cate(cat):
     data = filehandle(cat)
     #print(start, end)

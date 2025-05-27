@@ -5,3 +5,4 @@ python-dotenv==1.0.1
 requests==2.31.0
 Werkzeug==3.0.2
 easygoogletranslate==0.0.4
+flask-caching
