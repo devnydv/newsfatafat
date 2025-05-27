@@ -1,10 +1,11 @@
 """to make api call"""
 import requests
+from cachefile import cache
 # from dotenv import load_dotenv
 #import os
 #load_dotenv()
 #db = os.getenv("db")
-
+@cache.memoize(600)
 def filehandle(cate):
     """get 12 data from from category"""
     db = f'https://filmyapp-e1005.firebaseio.com/news/{cate}/data.json?orderBy="$key"&limitToLast=12'
